@@ -1,7 +1,7 @@
 import os
 from tonesCollection import TonesCollection
 
-path = "/Users/hlinhxd/Desktop/TonesDetector/Songs"
+path = os.getcwd() + "/Songs"
 
 os.chdir(path)
 
@@ -74,11 +74,13 @@ for file in os.listdir():
             lyrics.append(f.read().lower())
         f.close()
 
-for item in range(len(songs)):
+num_of_songs = len(songs)
+
+for item in range(num_of_songs):
     lyric_split = lyrics[item].split()
     result = check_word(lyric_split)
-    print(len(lyric_split))
     print(f"{songs[item]} \n"
+          f"Length: {len(lyric_split)} words \n" 
           f"{result} \n")
 
 print(f"Tổng: \n"
