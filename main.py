@@ -1,5 +1,15 @@
 import os
+import docx
 from tonesCollection import TonesCollection
+
+
+def getText(filename):
+    doc = docx.Document(filename)
+    full_text = []
+    for para in doc.paragraphs:
+        full_text.append(para.text)
+    return '\n'.join(full_text)
+
 
 path = os.getcwd() + "/Songs"
 
@@ -68,11 +78,7 @@ lyrics = []
 songs = []
 for file in os.listdir():
     songs.append(file)
-    if file.endswith(".txt"):
-        file_path = f"{path}/{file}"
-        with open(file_path, 'r') as f:
-            lyrics.append(f.read().lower())
-        f.close()
+    lyrics.append(getText(file))
 
 num_of_songs = len(songs)
 
@@ -80,7 +86,7 @@ for item in range(num_of_songs):
     lyric_split = lyrics[item].split()
     result = check_word(lyric_split)
     print(f"{songs[item]} \n"
-          f"Length: {len(lyric_split)} words \n" 
+          f"Length: {len(lyric_split)} words \n"
           f"{result} \n")
 
 print(f"Tổng: \n"
